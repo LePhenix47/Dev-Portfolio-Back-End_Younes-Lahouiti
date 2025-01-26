@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { z } from "zod";
 import { zValidator } from "@hono/zod-validator";
+import type { ContentfulStatusCode } from "hono/utils/http-status";
 
 const contactFormSchema = z.object({
   //*  First and Last Names: No numbers, accents allowed, 2-50 chars
@@ -54,7 +55,7 @@ contactRoute.post(route, zValidator("json", contactFormSchema), async (c) => {
       ],
     };
 
-    const discordPostOptions = {
+    const discordPostOptions: RequestInit = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,16 +64,30 @@ contactRoute.post(route, zValidator("json", contactFormSchema), async (c) => {
       body: JSON.stringify(discordPostRequestPayload),
     };
 
-    const url = new URL(process.env?.DISCORD_WEBHOOK_URL as string);
-    const res = await fetch(url, discordPostOptions);
+    // const webhookUrl = null;
+    const webhookUrl = new URL(process.env?.DISCORD_WEBHOOK_URL!);
+    if (!webhookUrl) {
+      return c.json(
+        { success: false, error: "Webhook URL is not configured" },
+        500
+      );
+    }
+
+    const res = await fetch(webhookUrl, discordPostOptions);
     if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
+      return c.json(
+        {
+          success: false,
+          error: `Failed to send data to Discord. Status: ${res.status}`,
+        },
+        res.status as ContentfulStatusCode
+      );
     }
 
     const data = await res.json();
 
     console.log(data);
-    return c.json({ ...data }, 200);
+    return c.json({ message: "Message sent successfully" }, 200);
   } catch (error) {
     console.error(error);
     return c.json({ error: "An error occurred" }, 500);
