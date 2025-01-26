@@ -7,6 +7,7 @@
     "dev": "bun --watch server.ts"
   },
   "devDependencies": {
+    "hono": "^4.6.19",
     "@types/bun": "latest"
   },
   "peerDependencies": {
