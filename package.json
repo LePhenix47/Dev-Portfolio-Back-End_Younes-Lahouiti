@@ -7,10 +7,15 @@
     "dev": "bun --watch server.ts"
   },
   "devDependencies": {
-    "hono": "^4.6.19",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "hono": "^4.6.19"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.4.2",
+    "portfolio-messager": "file:",
+    "zod": "^3.24.1"
   }
 }
