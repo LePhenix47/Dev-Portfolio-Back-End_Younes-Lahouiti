@@ -1,7 +1,11 @@
 {
   "name": "portfolio-messager",
-  "module": "index.ts",
+  "module": "server.ts",
   "type": "module",
+  "scripts": {
+    "start": "bun server.ts",
+    "dev": "bun --watch server.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
