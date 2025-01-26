@@ -1,16 +1,11 @@
 import { Hono } from "hono";
+import { logger } from "hono/logger";
+import { contactRoute } from "@routes/contact.route";
 
-const app = new Hono();
+const app = new Hono().basePath("/api");
 
-app.get("/", (c) => {
-  return c.text("Hello Hono!");
-});
+app.use(logger());
 
-app.get("/api/hello", (c) => {
-  return c.json({
-    ok: true,
-    message: "Hello Hono!",
-  });
-});
+app.route("/contact", contactRoute);
 
 export default app;
