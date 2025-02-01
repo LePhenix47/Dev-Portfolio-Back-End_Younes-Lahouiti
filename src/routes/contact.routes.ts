@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 import { zValidator } from "@hono/zod-validator";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 import env from "@src/env";

@@ -29,7 +29,7 @@ function createApp(): OpenAPIHono {
 
 const app: OpenAPIHono = createApp();
 
-// configureOpenAPIApp(app);
-// app.route("/contact", contactRoute);
+configureOpenAPIApp(app);
+app.route("/contact", contactRoute);
 
 export default app;
