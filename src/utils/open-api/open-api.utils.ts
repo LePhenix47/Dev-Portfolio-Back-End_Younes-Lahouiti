@@ -8,10 +8,12 @@ import { apiReference } from "@scalar/hono-api-reference";
  * at the path `/api/doc` and the Scalar API reference at the path `/api/scalar`.
  *
  * @param app - The OpenAPIHono app to configure
+ *
+ * @see [Zod OpenAPI doc](https://github.com/honojs/middleware/tree/main/packages/zod-openapi)
+ * @see [Scalar doc](https://github.com/scalar/scalar/blob/main/documentation/configuration.md)
  */
 export function configureOpenAPIApp(app: OpenAPIHono) {
   const documentationRoute = "doc" as const;
-
   app.doc(`/${documentationRoute}`, {
     openapi: "3.0.0",
     info: {
@@ -24,6 +26,10 @@ export function configureOpenAPIApp(app: OpenAPIHono) {
   app.get(
     `/${scalarRoute}`,
     apiReference({
+      defaultHttpClient: {
+        targetKey: "javascript",
+        clientKey: "fetch",
+      },
       theme: env.SCALAR_OPEN_API_THEME,
       spec: {
         url: "/api/doc",
@@ -32,6 +38,6 @@ export function configureOpenAPIApp(app: OpenAPIHono) {
   );
 
   console.log(
-    `For the documentation of this API, see the http://localhost:${env.PORT}/api/${scalarRoute}`
+    `For the documentation of this API, see \nhttp://localhost:${env.PORT}/api/${documentationRoute} \n or \n http://localhost:${env.PORT}/api/${scalarRoute}`
   );
 }

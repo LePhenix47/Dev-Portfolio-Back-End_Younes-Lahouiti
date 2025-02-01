@@ -51,6 +51,12 @@ const contactRoute = createRoute({
   tags: ["Contact"],
   summary: "Send a contact form to the Discord channel",
   description: "Sends a contact form to the Discord channel",
+  /*  
+  ? In case we need other middlewares, use createMiddleware from "hono/factory"
+
+  ? Example:
+  ? import { createMiddleware } from "hono/factory";
+  */
   middleware: [zValidator("json", contactFormSchema)] as const,
   request: {
     body: {
