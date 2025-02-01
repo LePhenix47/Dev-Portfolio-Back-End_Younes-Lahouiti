@@ -5,10 +5,11 @@ import { OpenAPIHono } from "@hono/zod-openapi";
 import notFound from "@utils/hono-handlers/not-found.utils";
 import onError from "@utils/hono-handlers/on-error.utils";
 
-import { createRouter } from "./utils/hono-handlers/router.utils";
-import { configureOpenAPIApp } from "./utils/open-api/open-api.utils";
+import { createRouter } from "@utils/hono-handlers/router.utils";
+import { configureOpenAPIApp } from "@utils/open-api/open-api.utils";
 
 import contactRouter from "@src/routes/contact.routes";
+import { configureRateLimiterApp } from "@utils/rate-limiter/rate-limiter.utils";
 
 /**
  * Creates the main application instance.
@@ -35,7 +36,11 @@ const app: OpenAPIHono = createApp();
 
 configureOpenAPIApp(app);
 
-const routesArray = [contactRouter];
+// ? Limit to 100 call requests per hour
+const ONE_HOUR_IN_MS: number = 60 * 60 * 1_000;
+configureRateLimiterApp(app, ONE_HOUR_IN_MS);
+
+const routesArray = [contactRouter] as const;
 
 for (const route of routesArray) {
   app.route("/", route);
