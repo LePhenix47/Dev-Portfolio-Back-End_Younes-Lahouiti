@@ -6,7 +6,7 @@ import { OpenAPIHono } from "@hono/zod-openapi";
  * @returns {OpenAPIHono} a new instance of OpenAPIHono
  */
 export function createRouter(): OpenAPIHono {
-  const router = new OpenAPIHono({ strict: false }).basePath("/api");
+  const router = new OpenAPIHono({ strict: false });
 
   return router;
 }

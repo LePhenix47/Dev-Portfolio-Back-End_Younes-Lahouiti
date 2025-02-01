@@ -1,11 +1,12 @@
 import { logger } from "hono/logger";
-import { contactRoute } from "@src/routes/contact.routes";
 import { OpenAPIHono } from "@hono/zod-openapi";
 
 import notFound from "@utils/hono-handlers/not-found.utils";
 import onError from "@utils/hono-handlers/on-error.utils";
 import { createRouter } from "./utils/hono-handlers/router.utils";
 import { configureOpenAPIApp } from "./utils/open-api/open-api.utils";
+
+import contactRouter from "@src/routes/contact.routes";
 
 /**
  * Creates the main application instance.
@@ -17,7 +18,8 @@ import { configureOpenAPIApp } from "./utils/open-api/open-api.utils";
  * @returns {OpenAPIHono} a new instance of OpenAPIHono
  */
 function createApp(): OpenAPIHono {
-  const app = createRouter();
+  // ? Doing app.basePath("/api") doesn't work
+  const app = createRouter().basePath("/api");
 
   app.notFound(notFound);
   app.onError(onError);
@@ -30,6 +32,11 @@ function createApp(): OpenAPIHono {
 const app: OpenAPIHono = createApp();
 
 configureOpenAPIApp(app);
-app.route("/contact", contactRoute);
+
+const routesArray = [contactRouter];
+
+for (const route of routesArray) {
+  app.route("/", route);
+}
 
 export default app;
