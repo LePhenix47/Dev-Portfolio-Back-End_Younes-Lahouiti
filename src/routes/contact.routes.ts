@@ -1,8 +1,8 @@
-import { Hono } from "hono";
 import { z } from "zod";
 import { zValidator } from "@hono/zod-validator";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 import env from "@src/env";
+import { createRouter } from "@src/utils/hono-handlers/router.utils";
 
 const contactFormSchema = z.object({
   //*  First and Last Names: No numbers, accents allowed, 2-50 chars
@@ -36,7 +36,7 @@ const contactFormSchema = z.object({
 
 type ContactForm = z.infer<typeof contactFormSchema>;
 
-export const contactRoute = new Hono();
+export const contactRoute = createRouter();
 
 const route = "/" as const;
 contactRoute.post(route, zValidator("json", contactFormSchema), async (c) => {
