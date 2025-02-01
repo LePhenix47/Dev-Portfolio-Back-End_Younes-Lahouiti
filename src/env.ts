@@ -1,5 +1,21 @@
 import { z, ZodError } from "zod";
 
+const THEME_IDS = [
+  "alternate",
+  "default",
+  "moon",
+  "purple",
+  "solarized",
+  "bluePlanet",
+  "deepSpace",
+  "saturn",
+  "kepler",
+  "elysiajs",
+  "fastify",
+  "mars",
+  "none",
+] as const;
+
 const EnvSchema = z.object({
   PORT: z.coerce.number().default(3000),
   NODE_ENV: z.string(),
@@ -9,6 +25,7 @@ const EnvSchema = z.object({
       /^https:\/\/discord(?:app)?\.com\/api\/webhooks\/\d+\/[\w-]+$/,
       "Invalid Discord webhook URL, please check the URL format."
     ),
+  SCALAR_OPEN_API_THEME: z.enum(THEME_IDS).optional(),
 });
 
 export type EnvType = z.infer<typeof EnvSchema>;
@@ -26,7 +43,9 @@ function getTypeSafeEnv(): EnvType | undefined {
     const env: EnvType = EnvSchema.parse(process.env);
     return env;
   } catch (err) {
-    console.error("✖ An unexpected error occurred:");
+    console.error(
+      "✖ An unexpected error occurred while creating the type safe env, some environment variables might be missing or have invalid values:"
+    );
 
     const error = err as ZodError;
     console.error(error.flatten().fieldErrors);

@@ -17,6 +17,7 @@
   "dependencies": {
     "@hono/zod-openapi": "^0.18.3",
     "@hono/zod-validator": "^0.4.2",
+    "@scalar/hono-api-reference": "^0.5.170",
     "portfolio-messager": "file:",
     "zod": "^3.24.1"
   }
