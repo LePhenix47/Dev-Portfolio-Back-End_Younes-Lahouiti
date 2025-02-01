@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { z } from "zod";
 import { zValidator } from "@hono/zod-validator";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
+import env from "@src/env";
 
 const contactFormSchema = z.object({
   //*  First and Last Names: No numbers, accents allowed, 2-50 chars
@@ -64,14 +65,7 @@ contactRoute.post(route, zValidator("json", contactFormSchema), async (c) => {
       body: JSON.stringify(discordPostRequestPayload),
     };
 
-    // const webhookUrl = null;
-    const webhookUrl = new URL(process.env?.DISCORD_WEBHOOK_URL!);
-    if (!webhookUrl) {
-      return c.json(
-        { success: false, error: "Webhook URL is not configured" },
-        500
-      );
-    }
+    const webhookUrl = new URL(env?.DISCORD_WEBHOOK_URL!);
 
     const res = await fetch(webhookUrl, discordPostOptions);
     if (!res.ok) {
