@@ -13,4 +13,4 @@ const server = Bun.serve({
   },
 });
 
-console.log(`Listening on http://localhost:${server.port}`);
+console.log(`Server listening on http://localhost:${server.port}`);
