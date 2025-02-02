@@ -16,6 +16,8 @@ const THEME_IDS = [
   "none",
 ] as const;
 
+const LAYOUTS = ["classic", "modern"] as const;
+
 const EnvSchema = z.object({
   PORT: z.coerce.number().default(3000),
   NODE_ENV: z.string(),
@@ -26,7 +28,23 @@ const EnvSchema = z.object({
       "Invalid Discord webhook URL, please check the URL format."
     ),
   SCALAR_OPEN_API_THEME: z.enum(THEME_IDS).optional(),
+  SCALAR_OPEN_API_LAYOUT: z.enum(LAYOUTS).optional().default("classic"),
 });
+
+/*
+? Note: Could use the superRefine() method to refine the ENV vars depending on the environment
+
+Example usage:
+
+EnvSchema.refine((data, ctx) => {
+    if (data.NODE_ENV === "production") {
+      return Boolean(data.DB_AUTH_TOKEN);
+    }
+
+    return true;
+  });
+
+*/
 
 export type EnvType = z.infer<typeof EnvSchema>;
 
