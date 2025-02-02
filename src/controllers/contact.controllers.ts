@@ -30,7 +30,7 @@ export const contactController: RouteHandler<ContactRouteType> = async (c) => {
       body: JSON.stringify(discordPostRequestPayload),
     };
 
-    const webhookUrl = new URL(env?.DISCORD_WEBHOOK_URL!);
+    const webhookUrl = new URL(env.DISCORD_WEBHOOK_URL);
 
     const res = await fetch(webhookUrl, discordPostOptions);
     if (!res.ok) {
