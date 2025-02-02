@@ -46,4 +46,6 @@ for (const route of routesArray) {
   app.route("/", route);
 }
 
+export type RPCAppType = (typeof routesArray)[number];
+
 export default app;
