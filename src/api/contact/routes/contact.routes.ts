@@ -5,6 +5,8 @@ import { zValidator } from "@hono/zod-validator";
 
 import * as HttpStatusCodes from "@utils/http/http-status-codes.utils";
 
+const tags: string[] = ["Contact"];
+
 const contactFormSchema = z
   .object({
     //*  First and Last Names: No numbers, accents allowed, 2-50 chars
@@ -41,18 +43,20 @@ export type ContactForm = z.infer<typeof contactFormSchema>;
 export const contactRoute = createRoute({
   path: "/contact",
   method: "post",
-  tags: ["Contact"],
+  tags,
   summary: "Send a contact form to the Discord channel",
   description: "Sends a contact form to the Discord channel",
   // In case you need additional middleware, you can add more items in the array
-  middleware: [zValidator("json", contactFormSchema)] as const,
+  //   middleware: [zValidator("json", contactFormSchema)] as const,
   request: {
     body: {
+      description: "Form to send to the Discord channel",
       content: {
         "application/json": {
           schema: contactFormSchema,
         },
       },
+      required: true,
     },
   },
   responses: {
