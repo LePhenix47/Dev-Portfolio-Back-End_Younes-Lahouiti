@@ -1,11 +1,9 @@
 import type { RouteHandler } from "@hono/zod-openapi";
-import type {
-  ContactForm,
-  ContactRouteType,
-} from "@api/contact/routes/contact.routes";
+import type { ContactRouteType } from "@api/contact/routes/contact.routes";
 import env from "@src/env";
 
 import * as HttpStatusCodes from "@utils/http/http-status-codes.utils";
+import type { ContactForm } from "@api/contact/schemas/contact.schemas";
 
 export const contactController: RouteHandler<ContactRouteType> = async (c) => {
   try {
