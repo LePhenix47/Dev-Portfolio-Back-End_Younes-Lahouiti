@@ -4,14 +4,16 @@ import { createRouter } from "@src/utils/hono-handlers/router.utils";
 
 const contactRouter = createRouter();
 
-contactRouter.openapi(
-  contactRoutes.contactRoute,
-  contactControllers.contactController
-);
+// Explicitly map routes to controllers
+const routeControllerMap = [
+  {
+    route: contactRoutes.contactRoute,
+    handler: contactControllers.contactController,
+  },
+];
 
-// for (const route of Object.values(contactRoutes)) {
-//   // @ts-ignore
-//   contactRouter.openapi(route, contactControllers[route.name]);
-// }
+for (const { route, handler } of routeControllerMap) {
+  contactRouter.openapi(route, handler);
+}
 
 export default contactRouter;

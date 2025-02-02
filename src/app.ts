@@ -8,7 +8,7 @@ import onError from "@utils/hono-handlers/on-error.utils";
 import { createRouter } from "@utils/hono-handlers/router.utils";
 import { configureOpenAPIApp } from "@utils/open-api/open-api.utils";
 
-import contactRouter from "@src/routes/contact.routes";
+import contactRouter from "@api/contact/index";
 import { configureRateLimiterApp } from "@utils/rate-limiter/rate-limiter.utils";
 
 /**
