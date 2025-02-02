@@ -51,12 +51,7 @@ const contactRoute = createRoute({
   tags: ["Contact"],
   summary: "Send a contact form to the Discord channel",
   description: "Sends a contact form to the Discord channel",
-  /*  
-  ? In case we need other middlewares, use createMiddleware from "hono/factory"
-
-  ? Example:
-  ? import { createMiddleware } from "hono/factory";
-  */
+  // In case you need additional middleware, you can add more items in the array.
   middleware: [zValidator("json", contactFormSchema)] as const,
   request: {
     body: {
@@ -90,8 +85,21 @@ const contactRoute = createRoute({
         },
       },
     },
+    [HttpStatusCodes.INTERNAL_SERVER_ERROR]: {
+      description: "Internal Server Error",
+      content: {
+        "application/json": {
+          schema: z.object({
+            success: z.boolean(),
+            error: z.string(),
+          }),
+        },
+      },
+    },
   },
 });
+
+type ContactRouteType = typeof contactRoute;
 
 const contactRouter = createRouter().openapi(contactRoute, async (c) => {
   try {
@@ -123,22 +131,30 @@ const contactRouter = createRouter().openapi(contactRoute, async (c) => {
 
     const res = await fetch(webhookUrl, discordPostOptions);
     if (!res.ok) {
+      console.error(res);
+
       return c.json(
         {
           success: false,
           error: `Failed to send data to Discord. Status: ${res.status}`,
         },
-        res.status as ContentfulStatusCode
+        HttpStatusCodes.BAD_REQUEST
       );
     }
 
-    const data = await res.json();
+    const data: {} = await res.json();
 
     console.log(data);
-    return c.json({ message: "Message sent successfully" }, 200);
+    return c.json(
+      { message: "Message sent successfully", success: true },
+      HttpStatusCodes.OK
+    );
   } catch (error) {
     console.error(error);
-    return c.json({ error: "An error occurred" }, 500);
+    return c.json(
+      { success: false, error: "An error occurred" },
+      HttpStatusCodes.INTERNAL_SERVER_ERROR
+    );
   }
 });
 export default contactRouter;
