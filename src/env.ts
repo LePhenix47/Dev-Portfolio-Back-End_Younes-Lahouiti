@@ -23,9 +23,10 @@ const EnvSchema = z.object({
   NODE_ENV: z.string(),
   DISCORD_WEBHOOK_URL: z
     .string()
+    .url("Invalid Discord webhook URL, provided string is not a URL.")
     .regex(
       /^https:\/\/discord(?:app)?\.com\/api\/webhooks\/\d+\/[\w-]+$/,
-      "Invalid Discord webhook URL, please check the URL format."
+      "Invalid Discord webhook URL, the provided URL is not a valid Discord webhook URL."
     ),
   SCALAR_OPEN_API_THEME: z.enum(THEME_IDS).optional(),
   SCALAR_OPEN_API_LAYOUT: z.enum(LAYOUTS).optional().default("classic"),
