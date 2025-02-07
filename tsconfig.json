@@ -26,6 +26,12 @@
     "noPropertyAccessFromIndexSignature": false,
     "baseUrl": "./",
     "paths": {
+      "@env": [
+        "./src/env.ts"
+      ],
+      "@app": [
+        "./src/app.ts"
+      ],
       "@/*": [
         "./*"
       ],

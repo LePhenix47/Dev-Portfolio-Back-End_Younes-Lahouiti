@@ -1,4 +1,4 @@
-import env from "@/src/env";
+import env from "@env";
 import { INTERNAL_SERVER_ERROR, OK } from "@utils/http/http-status-codes.utils";
 
 import type { ErrorHandler } from "hono";

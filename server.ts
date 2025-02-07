@@ -1,7 +1,7 @@
 import type { ErrorLike } from "bun";
 
-import app from "@src/app";
-import env from "./src/env";
+import app from "@app";
+import env from "@env";
 
 const server = Bun.serve({
   development: env.NODE_ENV === "development",

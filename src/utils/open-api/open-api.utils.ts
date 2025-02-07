@@ -1,6 +1,6 @@
 import type { OpenAPIHono } from "@hono/zod-openapi";
 import packageJSON from "@/package.json";
-import env from "@/src/env";
+import env from "@env";
 import { apiReference } from "@scalar/hono-api-reference";
 
 /**
