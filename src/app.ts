@@ -11,6 +11,8 @@ import { configureOpenAPIApp } from "@utils/open-api/open-api.utils";
 import contactRouter from "@api/contact/index";
 import { configureRateLimiterApp } from "@utils/rate-limiter/rate-limiter.utils";
 
+import { cors } from "hono/cors";
+
 /**
  * Creates the main application instance.
  *
@@ -26,6 +28,8 @@ function createApp(): OpenAPIHono {
 
   app.notFound(notFound);
   app.onError(onError);
+
+  app.use("*", cors());
 
   app.use(logger());
 
