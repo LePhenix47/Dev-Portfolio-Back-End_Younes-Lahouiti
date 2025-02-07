@@ -1,5 +1,5 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
-import defaultHook from "@utils/open-api/default-hook.utils";
+import defaultHook from "@/src/utils/hono-handlers/default-hook.utils";
 
 /**
  * Creates the main router for the application.
