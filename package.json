@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "bun --watch server.ts",
-    "dev": "bun --watch server.ts"
+    "dev": "bun --watch server.ts",
+    "install:dev": "bun install --save-text-lockfile",
+    "install:prod": "bun install --save-text-lockfile"
   },
   "devDependencies": {
     "@types/bun": "latest",
