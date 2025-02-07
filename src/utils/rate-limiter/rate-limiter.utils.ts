@@ -24,8 +24,24 @@ export function configureRateLimiterApp(
     rateLimiter({
       windowMs,
       limit, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-      standardHeaders: "draft-6", // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header,
-      keyGenerator: (c) => crypto.randomUUID(),
+      standardHeaders: "draft-7", // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header,
+      keyGenerator: (c) => {
+        // Get IP (First value from x-forwarded-for, otherwise use direct headers)
+        const ip: string =
+          c.req.header("x-forwarded-for")?.split(",")[0]?.trim() || // First IP in list
+          c.req.header("cf-connecting-ip") ||
+          c.req.header("x-real-ip") ||
+          c.req.header("forwarded") ||
+          "unknown-ip";
+
+        console.log("Rate Limit Key:", ip);
+        return ip; // Only using IP for better reliability
+      },
+
+      message: {
+        success: false,
+        message: "Too many requests, try again later",
+      },
     })
   );
 }
