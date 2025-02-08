@@ -4,10 +4,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "install:dev": "bun install --save-text-lockfile",
+    "install:prod": "bun install --save-text-lockfile",
     "start": "bun --watch server.ts",
     "dev": "bun --watch server.ts",
-    "install:dev": "bun install --save-text-lockfile",
-    "install:prod": "bun install --save-text-lockfile"
+    "test": "bun test",
+    "build": "bun build src/app.ts --outdir dist --minify",
+    "build:start": "bun dist/app.js",
+    "build:delete": "rm -rf dist/"
   },
   "devDependencies": {
     "@types/bun": "latest",
