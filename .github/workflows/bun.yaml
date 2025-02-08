@@ -15,9 +15,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2 # See https://github.com/marketplace/actions/setup-bun
         with:
-          bun-version: "1.2.2" # Using Bun v1.2.2
+          bun-version: "1.2.2"
+
+      - name: Install dependencies
+        run: bun install --save-text-lockfile
+
+      - name: Create .env file from sample and secrets
+        run: |
+          # Copy .env_sample to .env
+          cp .env_sample .env 
+
+          # Update mandatory and critical variables in .env
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
+          echo "DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}" >> .env
 
       - name: Cache Bun Dependencies
         uses: actions/cache@v3
@@ -26,9 +38,6 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('package.json') }}
           restore-keys: |
             ${{ runner.os }}-bun-
-
-      - name: Install dependencies
-        run: bun install --save-text-lockfile
 
       - name: Run tests
         run: bun test
