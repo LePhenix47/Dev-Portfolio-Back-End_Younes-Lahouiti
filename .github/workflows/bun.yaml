@@ -30,8 +30,8 @@ jobs:
           cp .env_sample .env 
 
           # Update mandatory and critical variables in .env
-          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
-          echo "DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}" >> .env
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" \n >> .env
+          echo "DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}" \n >> .env
 
       - name: Check .env file contents
         run: cat .env
