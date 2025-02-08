@@ -26,12 +26,17 @@ jobs:
 
       - name: Create .env file from sample and secrets
         run: |
-          # Copy .env_sample to .env
-          cp .env_sample .env 
+          # Copy .env_sample to .env and clean up optional variables after # Facultative
+          sed '/# Facultative/,$d' .env_sample > .env
 
           # Update mandatory and critical variables in .env
           sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ secrets.NODE_ENV }}|" .env
           sed -i "s|^DISCORD_WEBHOOK_URL=.*|DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}|" .env
+
+          # Remove optional environment variables if they are empty
+          sed -i '/^SCALAR_OPEN_API_THEME=/d' .env
+          sed -i '/^SCALAR_OPEN_API_LAYOUT=/d' .env
+          sed -i '/^PORT=/d' .env
 
       - name: Check .env file contents
         run: cat .env
