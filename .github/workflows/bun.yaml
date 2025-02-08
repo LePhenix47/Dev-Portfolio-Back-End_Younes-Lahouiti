@@ -16,22 +16,7 @@ jobs:
     steps:
       - name: Check environment and secrets
         run: |
-          echo "The current environment is: ${{ github.environment }}"
-
-          # Now echo the relevant secrets based on the environment set
-          echo "Secrets for environment ${GITHUB_ENV}:"
-          echo "NODE_ENV=${{ secrets.NODE_ENV }}"
-          echo "DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}"
-
-          if [[ "${{ github.environment }}" == "production" ]]; then
-            echo "Using production secrets"
-          elif [[ "${{ github.environment }}" == "development" ]]; then
-            echo "Using development secrets"
-          elif [[ "${{ github.environment }}" == "staging" ]]; then
-            echo "Using staging secrets"
-          else
-            echo "Using default secrets"
-          fi
+          echo "The current environment is: ${{ vars.PORT }}"
 
       - name: Checkout repository
         uses: actions/checkout@v4
