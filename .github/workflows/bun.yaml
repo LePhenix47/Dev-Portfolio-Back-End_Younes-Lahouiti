@@ -61,6 +61,6 @@ jobs:
           name: build-output
           path: |
             dist/*
-            .env
+            ./ .env
             package.json
             bun.lock
