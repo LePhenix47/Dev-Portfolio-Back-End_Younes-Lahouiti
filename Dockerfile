@@ -1,5 +1,5 @@
 # ---- Build Stage ----
-FROM oven/bun AS builder
+FROM oven/bun:1.2.2 AS builder
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ RUN bun build src/app.ts --outdir dist --minify
 RUN cat .env  # Debugging: Check if .env is copied
 
 # ---- Run Stage ----
-FROM oven/bun AS runner
+FROM oven/bun:1.2.2 AS runner
 
 WORKDIR /app
 
