@@ -30,8 +30,8 @@ export function configureOpenAPIApp(app: OpenAPIHono) {
         targetKey: "javascript",
         clientKey: "fetch",
       },
-      layout: env.SCALAR_OPEN_API_LAYOUT,
-      theme: env.SCALAR_OPEN_API_THEME,
+      layout: env.SCALAR_OPEN_API_LAYOUT || "modern",
+      theme: env.SCALAR_OPEN_API_THEME || "default",
       spec: {
         url: "/api/doc",
       },
