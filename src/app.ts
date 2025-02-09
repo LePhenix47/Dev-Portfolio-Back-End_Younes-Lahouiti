@@ -44,10 +44,12 @@ configureOpenAPIApp(app);
 const ONE_HOUR_IN_MS: number = 60 * 60 * 1_000;
 configureRateLimiterApp(app, ONE_HOUR_IN_MS);
 
-const routesArray = [contactRouter] as const;
+export const routesArray = [
+  { versioning: "/v1.0", endPointBase: "/contact", router: contactRouter },
+] as const;
 
-for (const route of routesArray) {
-  app.route("/", route);
+for (const { versioning, endPointBase, router } of routesArray) {
+  app.route(`${versioning}${endPointBase}`, router);
 }
 
 export type RPCAppType = (typeof routesArray)[number];
