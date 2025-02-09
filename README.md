@@ -23,6 +23,7 @@ This backend is containerized using Docker and includes a CI/CD pipeline for aut
     - [Production (Docker)](#production-docker)
   - [CI/CD Pipeline](#cicd-pipeline)
   - [Deployment](#deployment)
+  - [Additional Resources](#additional-resources)
 
 ## Tech stack
 
@@ -107,7 +108,7 @@ The server will be available at `http://localhost:3000/api`.
 This project includes interactive API documentation:
 
 - **OpenAPI**: Available at `http://localhost:3000/api/docs`
-- **Scalar**: A modern alternative to Swagger, available at `http://localhost:3000/api/scalar`
+- **Scalar**: [A modern alternative to Swagger](https://github.com/scalar/scalar/blob/main/documentation/configuration.md), available at `http://localhost:3000/api/scalar`
 
 These interfaces provide an easy way to explore and test API endpoints.
 
@@ -144,3 +145,10 @@ Example VPS deployment:
 docker pull [YOUR_DOCKER_USERNAME]/[DOCKERHUB_REPO_NAME]
 docker run -d -p 3000:3000 --env-file .env [YOUR_DOCKER_USERNAME]/[DOCKERHUB_REPO_NAME]
 ```
+
+## Additional Resources
+
+Must read docs:
+
+- [ZodOpenAPI](https://github.com/honojs/middleware/tree/main/packages/zod-openapi) for Hono OpenAPI
+- [Stocker](https://github.com/w3cj/stoker) for helper functions for our API
