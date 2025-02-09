@@ -41,7 +41,7 @@ This backend is containerized using Docker and includes a CI/CD pipeline for aut
   <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript logo" />
 </a>
 <a href="https://github.com/features/actions" target="_blank" rel="noreferrer" title="GitHub actions">
-  <img src="https://images.seeklogo.com/logo-png/42/2/github-actions-logo-png_seeklogo-428028.png?v=1957906501227119024" width="36" height="36" alt="GitHub actions logo" />
+  <img src="https://images.seeklogo.com/logo-png/42/2/github-actions-logo-png_seeklogo-428028.png" width="36" height="36" alt="GitHub actions logo" />
 </a>
 <a href="https://www.docker.com/" target="_blank" rel="noreferrer" title="Docker">
   <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-1024.png" width="44" height="40" alt="Docker logo" />
