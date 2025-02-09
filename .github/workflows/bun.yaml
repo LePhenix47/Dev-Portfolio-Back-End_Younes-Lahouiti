@@ -55,16 +55,6 @@ jobs:
       - name: Build the project
         run: bun run build
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-output
-          path: |
-            dist/*
-            ./ .env
-            package.json
-            bun.lock
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
