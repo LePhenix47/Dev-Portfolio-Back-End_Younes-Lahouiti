@@ -38,6 +38,8 @@ afterAll(() => {
   console.log("Finished Contact API tests.");
 });
 
+const contactApiEndRoute = "/v1.0/contact";
+
 // Helper function to check for a specific validation error on a field
 const checkValidationError = async (
   body: Record<string, any>,
@@ -45,7 +47,7 @@ const checkValidationError = async (
   expectedMessage: string,
   expectedCode: string
 ) => {
-  const res = await app.request("/contact", {
+  const res = await app.request(contactApiEndRoute, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -68,7 +70,7 @@ const checkValidationError = async (
 describe("Contact endpoint test", () => {
   describe("POST /contact", () => {
     it(`should return ${HttpStatusCodes.UNPROCESSABLE_ENTITY} for an empty contact form`, async () => {
-      const res = await app.request("/contact", {
+      const res = await app.request(contactApiEndRoute, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({}),
@@ -156,7 +158,7 @@ describe("Contact endpoint test", () => {
           "A new innovative project idea that is long enough to meet validation requirements, Bun + Hono happy path test.",
       };
 
-      const res = await app.request("/contact", {
+      const res = await app.request(contactApiEndRoute, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
