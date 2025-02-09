@@ -1,73 +1,82 @@
 import { expect, it, beforeAll, afterAll, describe } from "bun:test";
 import { Hono } from "hono";
-import contactRouter from "@api/contact/index";
 import * as HttpStatusCodes from "@utils/http/http-status-codes.utils";
-import env from "@/src/env";
-
-// Create a test app and mount the router
-const app = new Hono();
-app.route("/", contactRouter);
-
-// ? Stubbing Bun fetch() function to avoid unnecessary calls
-globalThis.fetch = async (input: URL | RequestInfo): Promise<Response> => {
-  const url = input instanceof URL ? input : new URL(input as string);
-
-  switch (url.href) {
-    case env.DISCORD_WEBHOOK_URL: {
-      const mockResponse = new Response(
-        JSON.stringify({
-          success: true,
-          message: "Mocked response from external service",
-        }),
-        { status: 200 }
-      );
-
-      return mockResponse;
-    }
-
-    default:
-      return new Response(null, { status: 404 });
-  }
-};
-
-beforeAll(() => {
-  console.log("Starting Contact API tests...");
-});
-
-afterAll(() => {
-  console.log("Finished Contact API tests.");
-});
-
-const contactApiEndRoute = "/v1.0/contact";
-
-// Helper function to check for a specific validation error on a field
-const checkValidationError = async (
-  body: Record<string, any>,
-  fieldName: string,
-  expectedMessage: string,
-  expectedCode: string
-) => {
-  const res = await app.request(contactApiEndRoute, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-
-  expect(res.status).toBe(HttpStatusCodes.UNPROCESSABLE_ENTITY);
-  const json = await res.json();
-
-  expect(json.success).toBe(false);
-  expect(json.error.name).toBe("ZodError");
-
-  const issue = json.error.issues.find(
-    (issue: any) => issue.path[0] === fieldName
-  );
-  expect(issue).toBeDefined();
-  expect(issue.message).toBe(expectedMessage);
-  expect(issue.code).toBe(expectedCode);
-};
+import env from "@env";
+import { routesArray } from "@app";
+import { createRouter } from "@utils/hono-handlers/router.utils";
 
 describe("Contact endpoint test", () => {
+  // Create a test app and mount the router
+  const app = createRouter().basePath("/api");
+
+  const contactRoute = routesArray.find((routeObj) => {
+    return routeObj.endPointBase === "/contact";
+  })!;
+
+  const { versioning, endPointBase, router } = contactRoute;
+
+  app.route(`${versioning}${endPointBase}`, router);
+
+  // ? API endpoint for the /contact route, if doesn't work, try adding this: .replaceAll(/\/{1,}/g, "/")
+  const contactApiEndRoute = `/api${versioning}${endPointBase}` as const;
+
+  // ? Stubbing Bun fetch() function to avoid unnecessary calls
+  globalThis.fetch = async (input: URL | RequestInfo): Promise<Response> => {
+    const url = input instanceof URL ? input : new URL(input as string);
+
+    switch (url.href) {
+      case env.DISCORD_WEBHOOK_URL: {
+        const mockResponse = new Response(
+          JSON.stringify({
+            success: true,
+            message: "Mocked response from external service",
+          }),
+          { status: 200 }
+        );
+
+        return mockResponse;
+      }
+
+      default:
+        return new Response(null, { status: 404 });
+    }
+  };
+
+  beforeAll(() => {
+    console.log("Starting Contact API tests...");
+  });
+
+  afterAll(() => {
+    console.log("Finished Contact API tests.");
+  });
+
+  // Helper function to check for a specific validation error on a field
+  const checkValidationError = async (
+    body: Record<string, any>,
+    fieldName: string,
+    expectedMessage: string,
+    expectedCode: string
+  ) => {
+    const res = await app.request(contactApiEndRoute, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    expect(res.status).toBe(HttpStatusCodes.UNPROCESSABLE_ENTITY);
+    const json = await res.json();
+
+    expect(json.success).toBe(false);
+    expect(json.error.name).toBe("ZodError");
+
+    const issue = json.error.issues.find(
+      (issue: any) => issue.path[0] === fieldName
+    );
+    expect(issue).toBeDefined();
+    expect(issue.message).toBe(expectedMessage);
+    expect(issue.code).toBe(expectedCode);
+  };
+
   describe("POST /contact", () => {
     it(`should return ${HttpStatusCodes.UNPROCESSABLE_ENTITY} for an empty contact form`, async () => {
       const res = await app.request(contactApiEndRoute, {

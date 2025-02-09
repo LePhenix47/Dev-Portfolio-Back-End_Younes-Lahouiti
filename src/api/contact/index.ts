@@ -2,7 +2,7 @@ import * as contactControllers from "./controllers/contact.controllers";
 import * as contactRoutes from "./routes/contact.routes";
 import { createRouter } from "@src/utils/hono-handlers/router.utils";
 
-const contactRouter = createRouter().basePath("/v1.0/contact");
+const contactRouter = createRouter();
 
 // Explicitly map routes to controllers
 const routeControllerMap = [
