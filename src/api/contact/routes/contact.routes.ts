@@ -9,7 +9,7 @@ import { contactFormSchema } from "@api/contact/schemas/contact.schemas";
 const tags: string[] = ["Contact"];
 
 export const contactRoute = createRoute({
-  path: "/contact",
+  path: "/",
   method: "post",
   tags,
   summary: "Send a contact form to the Discord channel",
