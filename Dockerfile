@@ -7,14 +7,10 @@ WORKDIR /app
 COPY package.json bun.lock ./ 
 RUN bun install --frozen-lockfile
 
-# Copy the rest of the app and build
+# Copy the rest of the app
 COPY . ./ 
 
-# 👇 Explicitly copy the .env file
-COPY .env .env 
-
-RUN bun build src/app.ts --outdir dist --minify
-RUN cat .env  # Debugging: Check if .env is copied
+# Skip running build, we copy pre-built assets from the CI pipeline
 
 # ---- Run Stage ----
 FROM oven/bun:1.2.2 AS runner
@@ -25,8 +21,8 @@ WORKDIR /app
 COPY --from=builder /app/dist /app/dist
 COPY --from=builder /app/bun.lock /app/package.json /app/
 
-# 👇 Copy .env into the final container
-COPY --from=builder /app/.env /app/.env  
+# 👇 Copy .env into the final container from the CI pipeline or use a custom path for this
+COPY .env .env
 
 EXPOSE 3000
 
