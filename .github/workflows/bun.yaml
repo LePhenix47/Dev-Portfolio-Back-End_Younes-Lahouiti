@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    environment: development
+    environment: production
 
     steps:
       - name: Check environment and secrets
@@ -66,8 +66,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/dev-portfolio-bun-hono-backend-dev:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/dev-portfolio-bun-hono-backend:latest .
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/dev-portfolio-bun-hono-backend-dev:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/dev-portfolio-bun-hono-backend:latest
