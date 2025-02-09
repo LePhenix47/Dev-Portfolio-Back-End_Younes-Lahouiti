@@ -2,7 +2,7 @@
 
 ### Description
 
-This project is the backend for the **Dev Portfolio** application, built with [Bun](https://bun.sh/) and [Hono](https://hono.dev/). It serves as the API layer, handling requests efficiently with minimal overhead.
+This project is the backend for the [**Dev Portfolio** application](https://github.com/LePhenix47/Dev-Portfolio_Younes-Lahouiti), built with [Bun](https://bun.sh/) and [Hono](https://hono.dev/). It serves as the API layer, handling requests efficiently with minimal overhead.
 
 This backend is containerized using Docker and includes a CI/CD pipeline for automated testing, building, and deployment.
 
