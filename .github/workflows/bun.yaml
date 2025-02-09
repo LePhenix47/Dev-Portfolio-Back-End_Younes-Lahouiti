@@ -35,7 +35,7 @@ jobs:
           sed '/# Facultative/,$d' .env_sample > .env
 
           # Update mandatory and critical variables in .env
-          sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ secrets.NODE_ENV }}|" .env
+          sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ vars.NODE_ENV }}|" .env
           sed -i "s|^DISCORD_WEBHOOK_URL=.*|DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}|" .env
 
       - name: Check .env file contents
