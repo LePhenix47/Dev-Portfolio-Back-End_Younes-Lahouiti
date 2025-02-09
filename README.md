@@ -27,12 +27,12 @@ This backend is containerized using Docker and includes a CI/CD pipeline for aut
 ## Tech stack
 
 - **Bun 1.2.2** - A fast JavaScript runtime
-- **Hono** - Lightweight web framework for Bun
-- **Docker** - Containerized deployment
+- **Hono** - Lightweight web framework for creating back-ends using TS
+- **Docker** - Containerized deployment to deploy our API to Clouds or VPSs
 - **GitHub Actions** - CI/CD pipeline
 
 <a href="https://bun.sh/" target="_blank" rel="noreferrer" title="Bun">
-  <img src="https://oauth.net/images/code/bun.png" width="41" height="36" alt="Bun logo" />
+  <img src="https://oauth.net/images/code/bun.png" width="42" height="36" alt="Bun logo" />
 </a>
 <a href="https://hono.dev/" target="_blank" rel="noreferrer" title="Hono">
   <img src="https://hono.dev/images/logo.png" width="36" height="36" alt="Hono logo" />
