@@ -76,4 +76,4 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/dev-portfolio-bun-hono-backend:latest
+          docker push dev-portfolio-bun-hono-backend:latest
