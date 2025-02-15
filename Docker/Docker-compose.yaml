@@ -7,6 +7,6 @@ services:
     build:
       context: ../ # Pointing to the root of the project (because that's where your app's context should be)
       dockerfile: ./Docker/Dockerfile # Path to Dockerfile inside the Docker/ folder
-    image: dev-portfolio-bun-hono-backend:latest # Name of our image
+    image: lephenix47/dev-portfolio-bun-hono-backend:latest # Name of our image
     ports:
       - "3000:3000"
