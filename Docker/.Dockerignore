@@ -1,0 +1,26 @@
+# The .dockerignore file excludes files from the container server process.
+# 
+# Mainly derived from GoogleCloudPlatform/google-samples
+# https://github.com/GoogleCloudPlatform/golang-samples/blob/master/run/helloworld/.dockerignore
+#
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+# Exclude locally vendored dependencies.
+vendor/
+
+# Exclude "build-time" ignore files.
+.gcloudignore
+
+# Exclude git history and configuration.
+.gitignore
+.git
+
+# Exclude documents
+NOTICE
+README.md
+LICENSE
+AUTHORS.md
+CONTRIBUTING.md
+
+# Editor configurations
+.editorconfig
