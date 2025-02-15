@@ -11,7 +11,9 @@
     "test": "bun test",
     "build": "bun build src/app.ts --outdir dist --minify",
     "build:start": "bun dist/app.js",
-    "build:delete": "rm -rf dist/"
+    "build:delete": "rm -rf dist/",
+    "docker-compose": "docker-compose -f Docker/Docker-compose.yaml build",
+    "docker-compose:local": "docker-compose -f Docker/Docker-compose.yaml up --build"
   },
   "devDependencies": {
     "@types/bun": "latest",

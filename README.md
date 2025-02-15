@@ -20,10 +20,12 @@ This backend is containerized using Docker and includes a CI/CD pipeline for aut
   - [Running the project](#running-the-project)
     - [Development](#development)
       - [API Documentation](#api-documentation)
-    - [Production (Docker)](#production-docker)
-  - [CI/CD Pipeline](#cicd-pipeline)
-  - [Deployment](#deployment)
-  - [Additional Resources](#additional-resources)
+    - [**Production (Docker)**](#production-docker)
+      - [**Build and Run the Application Locally with Docker Compose**](#build-and-run-the-application-locally-with-docker-compose)
+    - [**CI/CD Pipeline**](#cicd-pipeline)
+    - [**Deployment**](#deployment)
+      - [**VPS Deployment Example**:](#vps-deployment-example)
+    - [**Additional Resources**](#additional-resources)
 
 ## Tech stack
 
@@ -112,43 +114,61 @@ This project includes interactive API documentation:
 
 These interfaces provide an easy way to explore and test API endpoints.
 
-### Production (Docker)
+### **Production (Docker)**
 
-Build and run the containerized application locally:
+#### **Build and Run the Application Locally with Docker Compose**
 
-```sh
-docker build -t bun-hono-backend .
+For an easier development experience, we're using **Docker Compose** to build and run the application with a single command:
 
-docker run -p 3000:3000 --env-file .env bun-hono-backend
-```
+1. **Build and start the application**:
+   ```sh
+   # Runs this command: docker-compose -f Docker/docker-compose.yml build
+   bun run docker-compose
+   ```
 
-## CI/CD Pipeline
+2. **Access the app**:  
+   Once running, your app will be available at [http://localhost:3000/api](http://localhost:3000/api).
 
-This project includes a **GitHub Actions** workflow for:
+3. **Stop the application**:  
+   You can stop the app by running:
+   ```sh
+   docker-compose down
+   ```
+
+---
+
+### **CI/CD Pipeline**
+
+This project includes a **GitHub Actions** workflow for the following:
 
 - Running tests
 - Building the Bun application
-- Packaging and pushing a Docker image to DockerHub
+- Packaging and pushing a Docker image to Docker Hub
 
 The workflow is defined in `.github/workflows/bun.yml`.
 
-## Deployment
+### **Deployment**
 
 The backend can be deployed to a cloud service or a VPS:
 
 - **Docker Hub + VPS**: Pull the image and run it on your VPS
 - **AWS/GCP/Azure**: Deploy using ECS, Cloud Run, or App Services
 
-Example VPS deployment:
+#### **VPS Deployment Example**:
 
-```sh
-docker pull [YOUR_DOCKER_USERNAME]/[DOCKERHUB_REPO_NAME]
-docker run -d -p 3000:3000 --env-file .env [YOUR_DOCKER_USERNAME]/[DOCKERHUB_REPO_NAME]
-```
+1. **Pull the image from Docker Hub**:
+   ```sh
+   docker pull [YOUR_DOCKER_USERNAME]/[DOCKERHUB_REPO_NAME]
+   ```
 
-## Additional Resources
+2. **Run the container on your VPS**:
+   ```sh
+   docker run -d -p 3000:3000 --env-file .env [YOUR_DOCKER_USERNAME]/[DOCKERHUB_REPO_NAME]
+   ```
 
-Must read docs:
+---
+
+### **Additional Resources**
 
 - [ZodOpenAPI](https://github.com/honojs/middleware/tree/main/packages/zod-openapi) for Hono OpenAPI
 - [Stocker](https://github.com/w3cj/stoker) for helper functions for our API
