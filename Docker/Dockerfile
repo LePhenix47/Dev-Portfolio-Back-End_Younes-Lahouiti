@@ -1,13 +1,27 @@
-FROM oven/bun:1.2.2
+# ---- Build Stage ----
+FROM oven/bun:1.2.2 AS builder
 
 WORKDIR /app
 
+# Copy package.json and install dependencies
+COPY package.json ./
+RUN bun install --frozen-lockfile
+
 # Copy the rest of the app
 COPY . .
-RUN bun install --frozen-lockfile
 
 # Build the app (dist folder will be generated in this step)
 RUN bun run build
+
+# ---- Run Stage ----
+FROM oven/bun:1.2.2 AS runner
+
+WORKDIR /app
+
+# Copy the already built dist folder from the builder stage
+COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/bun.lock /app/bun.lock
+COPY --from=builder /app/package.json /app/package.json
 
 EXPOSE 3000
 

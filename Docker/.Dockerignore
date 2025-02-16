@@ -1,26 +1,47 @@
-# The .dockerignore file excludes files from the container server process.
-# 
-# Mainly derived from GoogleCloudPlatform/google-samples
-# https://github.com/GoogleCloudPlatform/golang-samples/blob/master/run/helloworld/.dockerignore
-#
-# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+# Node/Bun-related files (no need to include locally installed modules)
+node_modules/
+bun.lockb
+bun.lock
 
-# Exclude locally vendored dependencies.
-vendor/
+# Build artifacts (only need source code in Docker)
+dist/
+build/
+.cache/
+.DS_Store
 
-# Exclude "build-time" ignore files.
-.gcloudignore
-
-# Exclude git history and configuration.
+# Git-related files (useless in a container)
+.git/
 .gitignore
-.git
 
-# Exclude documents
-NOTICE
-README.md
-LICENSE
-AUTHORS.md
-CONTRIBUTING.md
+# Environment files (they should be passed at runtime)
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+.env_sample
 
-# Editor configurations
-.editorconfig
+# Docker-related
+Docker/
+Dockerfile
+docker-compose.yaml
+.dockerignore
+
+# Logs and temp files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-error.log*
+*.swp
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# MacOS/Linux-specific junk files
+.DS_Store
+Thumbs.db
