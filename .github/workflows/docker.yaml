@@ -12,6 +12,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Bun for scripts in package.json
+        uses: oven-sh/setup-bun@v2 # See https://github.com/marketplace/actions/setup-bun
+        with:
+          bun-version: "1.2.2"
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
