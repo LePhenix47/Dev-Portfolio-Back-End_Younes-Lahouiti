@@ -57,3 +57,4 @@ jobs:
   docker:
     needs: build # This ensures Docker build runs only if tests pass
     uses: ./.github/workflows/docker.yaml
+    secrets: inherit
