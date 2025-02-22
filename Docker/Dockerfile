@@ -11,7 +11,7 @@ RUN bun install --frozen-lockfile
 COPY . .
 
 # Build the app (dist folder will be generated in this step)
-RUN bun run build
+RUN bun run app:build
 
 # ---- Run Stage ----
 FROM oven/bun:1.2.2 AS runner
