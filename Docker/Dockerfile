@@ -23,6 +23,9 @@ COPY --from=builder /app/dist /app/dist
 COPY --from=builder /app/bun.lock /app/bun.lock
 COPY --from=builder /app/package.json /app/package.json
 
+# Copy the docker-compose.yaml file into the image
+COPY --from=builder /app/Docker/Docker-compose.yaml /app/Docker-compose.yaml
+
 EXPOSE 3000
 
 CMD ["bun", "run", "build:start"]
