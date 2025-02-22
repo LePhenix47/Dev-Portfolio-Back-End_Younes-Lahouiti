@@ -28,4 +28,4 @@ COPY --from=builder /app/Docker/Docker-compose.yaml /app/Docker-compose.yaml
 
 EXPOSE 3000
 
-CMD ["bun", "run", "build:start"]
+CMD ["bun", "run", "app:build-start"]
