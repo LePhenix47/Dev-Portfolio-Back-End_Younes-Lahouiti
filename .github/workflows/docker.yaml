@@ -46,7 +46,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          bun run docker-compose
+          bun run docker-compose:build-image
 
       - name: Push Docker image to Docker Hub
         run: |

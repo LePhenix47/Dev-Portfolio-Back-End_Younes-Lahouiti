@@ -52,7 +52,7 @@ jobs:
         run: bun run test
 
       - name: Build the project
-        run: bun run build
+        run: bun run app:build
 
   docker:
     needs: build # This ensures Docker build runs only if tests pass
