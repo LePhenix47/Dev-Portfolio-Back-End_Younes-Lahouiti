@@ -22,9 +22,8 @@ build/
 .env_sample
 
 # Docker-related
-Docker/
 Dockerfile
-docker-compose.yaml
+Docker-compose.local.yaml
 .dockerignore
 
 # Logs and temp files
