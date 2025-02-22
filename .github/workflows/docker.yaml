@@ -36,14 +36,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Create .env file from sample and secrets
-        run:
-          | # Copy .env_sample to .env and clean up optional variables after # Facultative, then update mandatory variables
-          sed '/# Facultative/,$d' .env_sample > .env
-
-          sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ vars.NODE_ENV }}|" .env
-          sed -i "s|^DISCORD_WEBHOOK_URL=.*|DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}|" .env
-
       - name: Build Docker image
         run: |
           bun run docker-compose:build-image
