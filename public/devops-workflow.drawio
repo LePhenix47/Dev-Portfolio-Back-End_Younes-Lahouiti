@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2025-03-02T14:13:24.265Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="ixlYNRNeUODi4mKRI7qA" version="24.1.0" type="device">
+<mxfile host="Electron" modified="2025-03-02T14:15:39.585Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="tsKcBRfmYVlsIzm7NQmq" version="24.1.0" type="device">
   <diagram name="Page-1" id="VJEp4AwiGzypi4i5XBt3">
-    <mxGraphModel dx="1562" dy="453" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1177" dy="216" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -34,8 +34,8 @@
         <mxCell id="EU8-1xfRZEfMaKdqypWL-50" value="TLS or SSL&lt;div&gt;for HTTPS&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="EU8-1xfRZEfMaKdqypWL-2">
           <mxGeometry x="32.76999999999998" y="82.08999999999997" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="EU8-1xfRZEfMaKdqypWL-36" value="VPS" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="EU8-1xfRZEfMaKdqypWL-5">
-          <mxGeometry x="63.879999999999995" y="18.939999999999998" width="60" height="30" as="geometry" />
+        <mxCell id="EU8-1xfRZEfMaKdqypWL-36" value="VPS (running on Ubuntu)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="EU8-1xfRZEfMaKdqypWL-5">
+          <mxGeometry x="63.88" y="18.94" width="156.12" height="30" as="geometry" />
         </mxCell>
         <mxCell id="EU8-1xfRZEfMaKdqypWL-42" value="" style="group" vertex="1" connectable="0" parent="EU8-1xfRZEfMaKdqypWL-5">
           <mxGeometry x="23" y="81.03" width="210" height="119.97000000000003" as="geometry" />
