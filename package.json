@@ -15,7 +15,7 @@
     "docker-compose:remote-run": "bun run check-docker && docker-compose down && docker-compose up",
     "docker-compose:local-run": "bun run check-docker && docker-compose -f Docker/Docker-compose.local.yaml up --build",
     "docker-compose:build-image": "bun run check-docker && docker-compose -f Docker/Docker-compose.local.yaml build",
-    "check-docker": "bun ./Docker/check-docker-desktop.ts"
+    "check-docker": "bun ./Docker/check-docker-engine.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
