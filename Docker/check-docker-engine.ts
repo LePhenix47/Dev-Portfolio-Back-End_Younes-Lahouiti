@@ -1,17 +1,16 @@
 import { $ } from "bun";
 
 /**
- * Checks if Docker Desktop is running by executing the `docker info` command.
- * If Docker is running, it logs a success message to the console.
- * If Docker is not running, it logs an error message and exits the process with an error code.
+ * Checks if the Docker Engine is running by running `docker info`.
+ * If the engine is not running, it will print an error message and exit with an error code.
  *
  * @returns {Promise<void>} A promise that resolves when the check is complete.
  * @see [Run shell commands with Bun](https://bun.sh/docs/runtime/shell)
  */
-async function checkIfDockerDesktopIsRunning(): Promise<void> {
+async function checkIfDockerEngineIsRunning(): Promise<void> {
   try {
     // Run 'docker info' to check if Docker is running
-    await $`docker info`.text();
+    await $/* shell */ `docker info`.text();
     console.log("✔ Check passed, Docker Engine is running!");
   } catch (error) {
     console.error(
@@ -27,4 +26,4 @@ async function checkIfDockerDesktopIsRunning(): Promise<void> {
   }
 }
 
-checkIfDockerDesktopIsRunning();
+checkIfDockerEngineIsRunning();
