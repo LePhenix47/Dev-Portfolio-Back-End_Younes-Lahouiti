@@ -26,9 +26,6 @@ jobs:
         with:
           bun-version: "1.2.2"
 
-      - name: Install dependencies
-        run: bun install --save-text-lockfile
-
       - name: Cache Bun Dependencies
         uses: actions/cache@v3
         with:
@@ -36,6 +33,9 @@ jobs:
           key: ${{ runner.os }}-bun-${{ hashFiles('package.json', 'bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        run: bun install --save-text-lockfile
 
       - name: Create .env file from sample and secrets
         run:
