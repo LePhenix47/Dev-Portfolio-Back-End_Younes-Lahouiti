@@ -52,8 +52,8 @@ jobs:
         run: |
           docker push lephenix47/dev-portfolio-bun-hono-backend:latest
 
-  deploy:
-    # This ensures Docker build runs only if tests pass
+  deployer:
     needs: image-build
+    # This ensures Docker build runs only if tests pass
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit

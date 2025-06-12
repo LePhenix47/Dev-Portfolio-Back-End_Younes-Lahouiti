@@ -3,7 +3,7 @@ version: "3"
 services:
   backend:
     env_file:
-      - .env # This should be in the same folder where you run docker-compose
+      - .env # This should be in the same folder where you run docker compose
     image: lephenix47/dev-portfolio-bun-hono-backend:latest # Use the pre-built image
     ports:
       - "3000:3000"
