@@ -1,9 +1,8 @@
 name: Deploy to VPS
 
 on:
-  push:
-    branches:
-      - master
+  workflow_call: # This allows it to be triggered from another workflow
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   deploy:
