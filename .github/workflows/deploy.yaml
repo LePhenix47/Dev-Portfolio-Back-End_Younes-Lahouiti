@@ -12,6 +12,24 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Rebuild .env securely
+        run: |
+          sed '/# Facultative/,$d' .env_sample > .env
+          sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ vars.NODE_ENV }}|" .env
+          sed -i "s|^DISCORD_WEBHOOK_URL=.*|DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}|" .env
+
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ vars.VPS_HOSTNAME }}
+          username: ${{ vars.VPS_USERNAME }}
+          password: ${{ secrets.VPS_DEPLOYER_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          source: |
+            .env
+            Docker/Docker-compose.yaml
+          target: /home/${{ vars.VPS_USERNAME }}/
+
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1
         with:
@@ -21,6 +39,22 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             echo "✅ SSH connection successful"
+
             whoami
             hostname
             uptime
+
+            # Move files to the right place
+            cd ~
+
+            rm -f .env
+            rm -f docker-compose.yml
+
+            mv -f Docker-compose.yaml docker-compose.yml
+
+            docker compose down
+            docker compose up -d --build
+
+            sudo service caddy reload
+
+            ls -la

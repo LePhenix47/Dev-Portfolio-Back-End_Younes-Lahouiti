@@ -47,6 +47,7 @@ jobs:
       - name: Build Docker image
         run: |
           bun run docker-compose:build-image
+        timeout-minutes: 10
 
       - name: Push Docker image to Docker Hub
         run: |
