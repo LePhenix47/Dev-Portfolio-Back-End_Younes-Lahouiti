@@ -18,6 +18,11 @@ jobs:
           sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ vars.NODE_ENV }}|" .env
           sed -i "s|^DISCORD_WEBHOOK_URL=.*|DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}|" .env
 
+      - name: Check files before scp
+        run: |
+          ls -la .env
+          ls -la Docker/Docker-compose.yaml
+
       - name: Copy files via SSH
         uses: appleboy/scp-action@v1
         with:
@@ -27,7 +32,7 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           source: |
             .env
-            Docker/Docker-compose.yaml
+            ./Docker/Docker-compose.yaml
           target: /home/${{ vars.VPS_USERNAME }}/
 
       - name: Deploy over SSH
