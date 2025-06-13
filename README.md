@@ -122,8 +122,8 @@ For an easier development experience, we're using **Docker Compose** to build an
 
 1. **Build and start the application**:
    ```sh
-   # Runs this command: docker-compose -f Docker/docker-compose.yml build
-   bun run docker-compose
+   # Runs this command: docker compose -f Docker/docker-compose.yml build
+   bun run docker compose
    ```
 
 2. **Access the app**:  
@@ -132,7 +132,7 @@ For an easier development experience, we're using **Docker Compose** to build an
 3. **Stop the application**:  
    You can stop the app by running:
    ```sh
-   docker-compose down
+   docker compose down
    ```
 
 ---

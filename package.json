@@ -12,9 +12,9 @@
     "app:build": "bun build src/app.ts --outdir dist --minify",
     "app:build-start": "bun dist/app.js",
     "app:build-delete": "rm -rf dist/",
-    "docker-compose:remote-run": "bun run check-docker && docker-compose down && docker-compose up",
-    "docker-compose:local-run": "bun run check-docker && docker-compose -f Docker/Docker-compose.local.yaml up --build",
-    "docker-compose:build-image": "bun run check-docker && docker-compose -f Docker/Docker-compose.local.yaml build",
+    "docker-compose:remote-run": "bun run check-docker && docker compose down && docker compose up",
+    "docker-compose:local-run": "bun run check-docker && docker compose -f Docker/Docker-compose.local.yaml up --build",
+    "docker-compose:build-image": "bun run check-docker && docker compose -f Docker/Docker-compose.local.yaml build",
     "check-docker": "bun ./Docker/check-docker-engine.ts"
   },
   "devDependencies": {
