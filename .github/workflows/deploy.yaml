@@ -2,22 +2,13 @@ name: Deploy to VPS
 
 on:
   workflow_call: # Allows it to be triggered from another workflow
-    secrets:
-      DISCORD_WEBHOOK_URL:
-        required: true
-      VPS_DEPLOYER_PASSWORD:
-        required: true
-      VPS_PORT:
-        required: true
-    inputs:
-      NODE_ENV:
-        required: true
-        type: string
   workflow_dispatch: # Allows manual triggering
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    environment: production
 
     steps:
       - name: Checkout repo

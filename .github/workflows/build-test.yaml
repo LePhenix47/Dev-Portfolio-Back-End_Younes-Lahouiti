@@ -58,6 +58,4 @@ jobs:
   docker:
     needs: build # This ensures Docker build runs only if tests pass
     uses: ./.github/workflows/docker.yaml
-    with:
-      NODE_ENV: ${{ vars.NODE_ENV }}
     secrets: inherit

@@ -2,17 +2,6 @@ name: Docker image build
 
 on:
   workflow_call: # This allows it to be triggered from another workflow
-    secrets:
-      DISCORD_WEBHOOK_URL:
-        required: true
-      VPS_DEPLOYER_PASSWORD:
-        required: true
-      VPS_PORT:
-        required: true
-    inputs:
-      NODE_ENV:
-        required: true
-        type: string
   workflow_dispatch: # Allows manual triggering
 
 jobs:
