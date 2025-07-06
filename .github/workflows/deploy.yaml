@@ -18,6 +18,9 @@ jobs:
           sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ vars.NODE_ENV }}|" .env
           sed -i "s|^DISCORD_WEBHOOK_URL=.*|DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}|" .env
 
+      - name: Check .env file contents
+        run: cat .env
+
       - name: Move Docker-compose.yaml to project root as docker-compose.yml
         run: mv Docker/Docker-compose.yaml docker-compose.yml
 

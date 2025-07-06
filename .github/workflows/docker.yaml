@@ -44,6 +44,9 @@ jobs:
           sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ vars.NODE_ENV }}|" .env
           sed -i "s|^DISCORD_WEBHOOK_URL=.*|DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}|" .env
 
+      - name: Check .env file contents
+        run: cat .env
+
       - name: Build Docker image
         run: |
           bun run docker-compose:build-image
