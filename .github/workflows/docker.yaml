@@ -52,7 +52,7 @@ jobs:
           | # Copy .env_sample to .env and clean up optional variables after # Facultative, then update mandatory variables
           sed '/# Facultative/,$d' .env_sample > .env
 
-          sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ vars.NODE_ENV }}|" .env
+          sed -i "s|^NODE_ENV=.*|NODE_ENV=${{ inputs.NODE_ENV }}|" .env
           sed -i "s|^DISCORD_WEBHOOK_URL=.*|DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}|" .env
 
       - name: Check .env file contents
@@ -71,4 +71,6 @@ jobs:
     needs: image-build
     # This ensures Docker build runs only if tests pass
     uses: ./.github/workflows/deploy.yaml
+    with:
+      NODE_ENV: ${{ inputs.NODE_ENV }}
     secrets: inherit
